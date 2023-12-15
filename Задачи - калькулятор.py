@@ -1,18 +1,24 @@
-a = float(input("Введите первое число: "))
-b = float(input("Введите второе число: "))
-make = str(input("Какая операция? (+, -, *, /): "))
-if make == "+":
-    c = a + b
-    print("Результат:", int(c))
-elif make == "-":
-    c = a - b
-    print("Результат:", int(c))
-elif make == "*":
-    c = a * b
-    print("Результат:", int(c))
-elif make == "/":
-    if a == 0 or b == 0:
-        print("Результат:", int(c))
-    else:
-        c = a / b
-        print("Результат:", int(c))
+s = 'один плюс ноль'
+ls = s.split(' ')
+d1 = {'ноль': 0, 'один': 1, 'двенадцать': 12, 'девятьнадцать': 19}
+d_op = {'плюс': lambda x, y: x + y}
+i = 0
+try:
+    e1 = d1[ls[i]]
+except KeyError:
+    raise NotImplementedError
+i += 1
+try:
+    func = d_op[ls[i]]
+except KeyError:
+    raise ValueError('ожидался оператор, найдена ересь: "%s"' % ls[i])
+i += 1
+try:
+    e2 = d1[ls[i]]
+except KeyError:
+    raise NotImplementedError
+i += 1
+if i != len(ls):
+    raise ValueError('найдена ересь: "%s"' % ls[i:])
+r = func(e1, e2)
+print(r)
